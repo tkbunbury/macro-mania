@@ -6,12 +6,14 @@ import { images } from '../../constants'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
 import RecipeCard from '../../components/RecipeCard'
-import { getAllPosts } from '../../lib/appwrite'
+import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 
 const Home = () => {
 
   const { data: posts, refetch } = useAppwrite(getAllPosts);
+
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
 
   const [refreshing, setRefreshing] = useState(false)
 
@@ -49,12 +51,8 @@ const Home = () => {
                   source={images.logoSmall_2}
                   className="w-9 h-12"
                   resizeMode='contain'
-
-
                 />
-
               </View>
-
             </View>
 
             <SearchInput />
@@ -64,7 +62,7 @@ const Home = () => {
                 Latest Recipes
               </Text>
 
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={latestPosts ?? []} />
 
             </View>
 
