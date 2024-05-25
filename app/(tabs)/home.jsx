@@ -5,7 +5,7 @@ import SearchInput from '../../components/SearchInput'
 import { images } from '../../constants'
 import Trending from '../../components/Trending'
 import EmptyState from '../../components/EmptyState'
-import RecipeCard from '../../components/RecipeCard'
+import VideoCard from '../../components/VideoCard'
 import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
@@ -26,8 +26,6 @@ const Home = () => {
     setRefreshing(false);
   }
 
-  // console.log(posts)
-
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -35,7 +33,13 @@ const Home = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <RecipeCard recipe={item} />
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">

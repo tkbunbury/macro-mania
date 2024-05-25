@@ -53,47 +53,15 @@ const TabsLayout = () => {
                 }}
             />
             <Tabs.Screen
-                name="planner"
+                name="create"
                 options={{
-                    title: 'Planner',
+                    title: 'Create',
                     headerShown: false,
                     tabBarIcon: ({ color, focused }) => (
                         <TabIcon
-                            icon={icons.bookmark}
+                            icon={icons.plus}
                             color={color}
-                            name="Planner"
-                            focused={focused}
-                        />
-
-                    )
-                }}
-            />
-            <Tabs.Screen
-                name="recipes"
-                options={{
-                    title: 'Recipes',
-                    headerShown: false,
-                    tabBarIcon: ({ color, focused }) => (
-                        <TabIcon
-                            icon={icons.search}
-                            color={color}
-                            name="Recipes"
-                            focused={focused}
-                        />
-
-                    )
-                }}
-            />
-            <Tabs.Screen
-                name="groceries"
-                options={{
-                    title: 'Groceries',
-                    headerShown: false,
-                    tabBarIcon: ({ color, focused }) => (
-                        <TabIcon
-                            icon={icons.groceries}
-                            color={color}
-                            name="Groceries"
+                            name="Create"
                             focused={focused}
                         />
 
