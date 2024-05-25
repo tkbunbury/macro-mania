@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import SearchInput from '../../components/SearchInput'
 import EmptyState from '../../components/EmptyState'
-import RecipeCard from '../../components/RecipeCard'
+import VideoCard from '../../components/VideoCard'
 import { searchPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import { useLocalSearchParams } from 'expo-router'
@@ -24,7 +24,13 @@ const Search = () => {
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <RecipeCard recipe={item} />
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4">

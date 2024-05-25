@@ -2,7 +2,7 @@ import { View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import EmptyState from '../../components/EmptyState'
-import RecipeCard from '../../components/RecipeCard'
+import VideoCard from '../../components/VideoCard'
 import { getUserPosts, signOut } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
@@ -23,15 +23,19 @@ const Profile = () => {
     router.replace('/sign-in')
 
   }
-
-
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <RecipeCard recipe={item} />
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+            />
         )}
         ListHeaderComponent={() => (
           <View className="w-full justify-center items-center mt-6 mb-12 px-4">
@@ -73,7 +77,6 @@ const Profile = () => {
             subtitle="No recipes found for this search query"
           />
         )}
-      
       />
     </SafeAreaView>
   )

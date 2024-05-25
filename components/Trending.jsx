@@ -1,6 +1,8 @@
-import { View, Text, FlatList, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import React, { useState } from 'react'
 import * as Animatable from 'react-native-animatable';
+import { Video, ResizeMode } from 'expo-av'
+import { icons } from '../constants'
 
 const zoomIn = {
     0: {
@@ -21,7 +23,7 @@ const zoomOut = {
 }
 
 const TrendingItem = ({ activeItem, item }) => {
-    // const [play, setPlay] = useState(false)
+    const [play, setPlay] = useState(false)
 
 
     return (
@@ -30,10 +32,26 @@ const TrendingItem = ({ activeItem, item }) => {
             animation={activeItem === item.$id ? zoomIn : zoomOut}
             duration={500}
         >
-            <TouchableOpacity
+
+            {play ? (
+                <Video
+                    source={{ uri: item.video }}
+                    className="w-52 h-72 rounded-[35px] mt-3 bg-white/10"
+                    resizeMode={ResizeMode.CONTAIN}
+                    useNativeControls
+                    shouldPlay
+                    onPlaybackStatusUpdate={(status) => {
+                        if(status.didJustFinish) {
+                            setPlay(false);
+                        }
+                    }}
+                
+                />
+            ) : (
+               <TouchableOpacity
                 className="relative justify-center items-center"
                 activeOpacity={0.7}
-                // onPress={() => setPlay(true)}
+                onPress={() => setPlay(true)}
             >
                 <ImageBackground
                     source={{
@@ -42,7 +60,16 @@ const TrendingItem = ({ activeItem, item }) => {
                     className="w-52 h-72 rounded-[35px] my-5 overflow-hidden shadow-lg shadow-black/40"
                     resizeMode='cover'
                 />
-            </TouchableOpacity>
+                <Image
+                source={icons.play}
+                className="w-12 h-12 absolute"
+                resizeMode='contain'
+                />
+            </TouchableOpacity> 
+            )}
+
+
+            
         </Animatable.View>
     )
 }
