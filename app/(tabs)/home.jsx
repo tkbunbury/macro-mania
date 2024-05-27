@@ -66,7 +66,7 @@ const Home = () => {
 
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-gray-100 text-lg font-pregular mb-3">
-                Latest Recipes
+                Latest Meals
               </Text>
 
               <Trending posts={latestPosts ?? []} />
@@ -77,8 +77,8 @@ const Home = () => {
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Recipes Found"
-            subtitle="Be the first one to upload a recipe"
+            title="No Meals Found"
+            subtitle="Be the first one to upload a meal"
           />
         )}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
